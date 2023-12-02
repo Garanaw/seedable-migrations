@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+use Garanaw\SeedableMigrations\Blueprint;
+use Garanaw\SeedableMigrations\Enum\SeedAt;
+use Garanaw\SeedableMigrations\Migration;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        //
+    }
+
+    public function getTable(): string
+    {
+        return '';
+    }
+
+    public function seedAt(): SeedAt
+    {
+        return SeedAt::NEVER;
+    }
+
+    public function down(): void
+    {
+        //
+    }
+};

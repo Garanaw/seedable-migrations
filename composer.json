@@ -1,0 +1,47 @@
+{
+    "name": "garanaw/seedable-migrations",
+    "description": "Allows to self seed migrations in a more controlled way",
+    "keywords": ["laravel", "seed", "seeder", "migrations", "migration", "database", "seedable", "seedable-migrations"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "role": "Developer",
+            "name": "Pablo Villalba",
+            "email": "garanaw@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "illuminate/console": "^10.34",
+        "illuminate/database": "^10.34",
+        "illuminate/support": "^10.34"
+    },
+    "autoload": {
+        "psr-4": {
+            "Garanaw\\SeedableMigrations\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Garanaw\\SeedableMigrations\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Garanaw\\SeedableMigrations\\SeedableMigrationsServiceProvider"
+            ]
+        }
+    }
+}
