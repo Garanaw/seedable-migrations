@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Garanaw\SeedableMigrations\Listeners;
 
@@ -20,11 +20,11 @@ class MigrationEndedListener extends MigrationListener
     {
         $migration = $event->migration;
 
-        if (! $migration instanceof SeedableMigration) {
+        if (!$migration instanceof SeedableMigration) {
             return;
         }
 
-        if (! $this->shouldSeedNow($migration)) {
+        if (!$this->shouldSeedNow($migration)) {
             $this->saveIfShouldSeedLater($migration);
             return;
         }
@@ -51,7 +51,7 @@ class MigrationEndedListener extends MigrationListener
      */
     protected function saveIfShouldSeedLater(SeedableMigration $migration): void
     {
-        if (! $migration->shouldSeed()) {
+        if (!$migration->shouldSeed()) {
             return;
         }
 

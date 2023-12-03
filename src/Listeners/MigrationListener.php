@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Garanaw\SeedableMigrations\Listeners;
 
 use Garanaw\SeedableMigrations\Contracts\SeedableMigration;
 use Garanaw\SeedableMigrations\Seeder;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 
 /**
@@ -31,7 +30,7 @@ abstract class MigrationListener
      */
     protected function handleMigration(SeedableMigration $migration, string $method): void
     {
-        if (! $this->shouldSeedNow($migration)) {
+        if (!$this->shouldSeedNow($migration)) {
             return;
         }
 
@@ -77,7 +76,7 @@ abstract class MigrationListener
      */
     public function upSeed(SeedableMigration $migration): void
     {
-        if (! $migration->hasUpSeeders()) {
+        if (!$migration->hasUpSeeders()) {
             return;
         }
 
@@ -92,7 +91,7 @@ abstract class MigrationListener
      */
     public function downSeed(SeedableMigration $migration): void
     {
-        if (! $migration->hasDownSeeders()) {
+        if (!$migration->hasDownSeeders()) {
             return;
         }
 

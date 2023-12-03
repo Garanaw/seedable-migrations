@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Garanaw\SeedableMigrations;
 
@@ -18,7 +18,8 @@ abstract class Migration extends BaseMigration implements SeedableMigration
 
     protected Builder $schema;
 
-    public function __construct() {
+    public function __construct()
+    {
         /** @var DatabaseManager $manager */
         $manager = app(DatabaseManager::class);
         $this->db = $manager->connection();

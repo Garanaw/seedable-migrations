@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Garanaw\SeedableMigrations\Cache\SeedableMigrations;
 use Garanaw\SeedableMigrations\Tests\Fixtures\DummyMigration;
 use Garanaw\SeedableMigrations\Tests\Fixtures\MigrationWithDownSeeders;
@@ -42,7 +44,7 @@ describe('SeedableMigration Cache', function () {
 
     it('removes a migration', function () {
         $migration = new DummyMigration();
-        $migration2 = new class extends DummyMigration {
+        $migration2 = new class () extends DummyMigration {
         };
         SeedableMigrations::add($migration);
         SeedableMigrations::add($migration2);
@@ -57,7 +59,7 @@ describe('SeedableMigration Cache', function () {
 
     it('adds many migrations', function () {
         $migration = new DummyMigration();
-        $migration2 = new class extends DummyMigration {
+        $migration2 = new class () extends DummyMigration {
         };
         SeedableMigrations::addMany([$migration, $migration2]);
 
