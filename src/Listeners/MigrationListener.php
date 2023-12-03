@@ -6,6 +6,7 @@ namespace Garanaw\SeedableMigrations\Listeners;
 
 use Garanaw\SeedableMigrations\Contracts\SeedableMigration;
 use Garanaw\SeedableMigrations\Seeder;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 
 /**
@@ -40,11 +41,18 @@ abstract class MigrationListener
     /**
      * Runs the seeders.
      *
-     * @param Seeder $seeder
+     * @param Seeder|string $seeder
      * @return void
+     * @throws BindingResolutionException
      */
-    protected function runSeeder(Seeder $seeder): void
+    protected function runSeeder(Seeder|string $seeder): void
     {
+        if (is_string($seeder)) {
+            $seeder = $this->container->make($seeder);
+        }
+
+        $seeder = $this->configureIfRequired($seeder);
+
         $result = $this->container->call([$seeder, 'run']);
 
         if ($result === false) {
@@ -68,11 +76,27 @@ abstract class MigrationListener
         }
     }
 
+    protected function configureIfRequired(Seeder $seeder): Seeder
+    {
+        if (!method_exists($seeder, 'configure')) {
+            return $seeder;
+        }
+
+        $reflector = new \ReflectionClass($seeder);
+
+        if ($reflector->getMethod('configure')->isPublic()) {
+            $this->container->call([$seeder, 'configure']);
+        }
+
+        return $seeder;
+    }
+
     /**
      * Runs the seeders after the migration is up.
      *
      * @param SeedableMigration $migration
      * @return void
+     * @throws BindingResolutionException
      */
     public function upSeed(SeedableMigration $migration): void
     {
@@ -80,7 +104,7 @@ abstract class MigrationListener
             return;
         }
 
-        $migration->upSeeders()->each(fn (Seeder $seeder) => $this->runSeeder($seeder));
+        $migration->upSeeders()->each(fn (Seeder|string $seeder) => $this->runSeeder($seeder));
     }
 
     /**
@@ -88,6 +112,7 @@ abstract class MigrationListener
      *
      * @param SeedableMigration $migration
      * @return void
+     * @throws BindingResolutionException
      */
     public function downSeed(SeedableMigration $migration): void
     {
