@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Garanaw\SeedableMigrations\Listeners;
 
 use Garanaw\SeedableMigrations\Contracts\SeedableMigration;
+use Garanaw\SeedableMigrations\Seeder;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 
@@ -40,18 +41,15 @@ abstract class MigrationListener
     /**
      * Runs the seeders.
      *
-     * @param class-string<T> $seederName
+     * @param Seeder $seeder
      * @return void
-     * @throws BindingResolutionException
      */
-    protected function runSeeder(string $seederName): void
+    protected function runSeeder(Seeder $seeder): void
     {
-        $seeder = $this->container->make($seederName);
-
         $result = $this->container->call([$seeder, 'run']);
 
         if ($result === false) {
-            $this->failedSeeders[] = $seederName;
+            $this->failedSeeders[] = $seeder;
         }
     }
 
@@ -76,15 +74,14 @@ abstract class MigrationListener
      *
      * @param SeedableMigration $migration
      * @return void
-     * @throws BindingResolutionException
      */
-    protected function upSeed(SeedableMigration $migration): void
+    public function upSeed(SeedableMigration $migration): void
     {
         if (! $migration->hasUpSeeders()) {
             return;
         }
 
-        $migration->upSeeders()->each(fn (string $name) => $this->runSeeder($name));
+        $migration->upSeeders()->each(fn (Seeder $seeder) => $this->runSeeder($seeder));
     }
 
     /**
@@ -92,15 +89,14 @@ abstract class MigrationListener
      *
      * @param SeedableMigration $migration
      * @return void
-     * @throws BindingResolutionException
      */
-    protected function downSeed(SeedableMigration $migration): void
+    public function downSeed(SeedableMigration $migration): void
     {
         if (! $migration->hasDownSeeders()) {
             return;
         }
 
-        $migration->downSeeders()->each(fn (string $name) => $this->runSeeder($name));
+        $migration->downSeeders()->each(fn (Seeder $seeder) => $this->runSeeder($seeder));
     }
 
     /**

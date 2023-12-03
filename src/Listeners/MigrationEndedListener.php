@@ -25,7 +25,7 @@ class MigrationEndedListener extends MigrationListener
         }
 
         if (! $this->shouldSeedNow($migration)) {
-            $this->saveIfShouldSeedLater($migration, $event);
+            $this->saveIfShouldSeedLater($migration);
             return;
         }
 
@@ -47,10 +47,9 @@ class MigrationEndedListener extends MigrationListener
      * Saves the migration to be seeded later.
      *
      * @param SeedableMigration $migration
-     * @param MigrationEnded $event
      * @return void
      */
-    protected function saveIfShouldSeedLater(SeedableMigration $migration, MigrationEnded $event): void
+    protected function saveIfShouldSeedLater(SeedableMigration $migration): void
     {
         if (! $migration->shouldSeed()) {
             return;

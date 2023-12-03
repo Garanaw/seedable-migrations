@@ -30,6 +30,8 @@ class MigrationsEndedListener extends MigrationListener
         SeedableMigrations::$method()
             ->filter(fn (SeedableMigration $migration) => $this->shouldSeedNow($migration))
             ->each(fn (SeedableMigration $migration) => $this->handleMigration($migration, $event->method));
+
+        SeedableMigrations::clear();
     }
 
     /**

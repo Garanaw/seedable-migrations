@@ -80,7 +80,7 @@ abstract class Migration extends BaseMigration implements SeedableMigration
      */
     public function getSeeders(string $method): Collection
     {
-        $callable = [$this, "{$method}Seed"];
+        $callable = "{$method}Seeders";
         return Collection::wrap($this->$callable() ?? []);
     }
 
