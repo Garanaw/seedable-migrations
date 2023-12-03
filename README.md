@@ -104,8 +104,8 @@ A few things to note here:
 - The `run()` method is now mandatory. This is where you should put your seeder code.
 - The `getData()` method is used to return the data that should be seeded. This method is mandatory now as it follows an interface. If you don't want to seed anything, you can return an empty array.
 - The `run()` method now has a return typehint of `bool`. This is mandatory, as it follows an interface, and it's used to store the failed seeders.
-- The `run()` method is now called through the `Container::call()` method. This means that you can use dependency injection in your seeder class.
-- Alternatively, you can create a `__construct()` method in your seeder class. This method will be called before the `run()` method, and you can use dependency injection in it.
+- If your seeder contains a method called `configure()`, it will be called through the `Container::call()`. This means that you can use dependency injection in your seeder class to add extra configuration if needed.
+- Alternatively, you can create a `__construct()` method in your seeder class. This method will be called before the `run()` method, and you can use dependency injection in it, but it will require the parameters from the parent class.
 
 ## How to use
 
@@ -141,6 +141,21 @@ Another optional method is the `shouldSeed()` method. This method is used to spe
 ```
 
 Within the `shouldSeed()` method, you can use the `app()->environment()` method to check the environment, or any other logic to determine if the seeder should run or not.
+
+To configure your seeder, you only need to add a `configure()` method to your seeder class:
+
+```php
+    public function configure(
+        \Illuminate\Config\Repository $config,
+        \Illuminate\Foundation\Application $app,
+        \Illuminate\Contracts\Console\Kernel $artisan,
+        \Illuminate\Contracts\Debug\ExceptionHandler $exceptionHandler,
+        App\Providers\RouteServiceProvider $routeServiceProvider,
+        \Psr\Log\LoggerInterface $logger,
+    ): void {
+        // Your configuration code here. You can inject anything that is configured in your container
+    }
+```
 
 ## Security Vulnerabilities
 
