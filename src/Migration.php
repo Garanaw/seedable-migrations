@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Garanaw\SeedableMigrations;
 
+use Garanaw\SeedableMigrations\Enum\SeedAt;
 use Garanaw\SeedableMigrations\Contracts\SeedableMigration;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Blueprint as BaseBlueprint;
@@ -93,5 +94,30 @@ abstract class Migration extends BaseMigration implements SeedableMigration
     public function shouldSeed(): bool
     {
         return true;
+    }
+
+    /**
+     * Returns seeders to run on the UP method
+     *
+     * @return Collection<int, class-string<Seeder>>
+     */
+    public function upSeeders(): Collection
+    {
+        return new Collection();
+    }
+
+    /**
+     * Returns seeders to run on the DOWN method
+     *
+     * @return Collection<int, class-string<Seeder>>
+     */
+    public function downSeeders(): Collection
+    {
+        return new Collection();
+    }
+
+    public function seedAt(): SeedAt
+    {
+        return SeedAt::NEVER;
     }
 }
