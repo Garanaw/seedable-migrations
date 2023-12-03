@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Garanaw\SeedableMigrations\Tests\Fixtures\MigrationWithDownSeeders;
 use Garanaw\SeedableMigrations\Tests\Fixtures\MigrationWithUpSeeders;
 use Garanaw\SeedableMigrations\Tests\Fixtures\NeverMigration;

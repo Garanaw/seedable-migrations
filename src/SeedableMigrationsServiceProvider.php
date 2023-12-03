@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Garanaw\SeedableMigrations;
 
@@ -22,7 +22,7 @@ class SeedableMigrationsServiceProvider extends ServiceProvider
 
     protected function about(): void
     {
-        AboutCommand::add('Seedable Migrations',  [
+        AboutCommand::add('Seedable Migrations', [
             'version' => '1.0.0',
         ]);
     }

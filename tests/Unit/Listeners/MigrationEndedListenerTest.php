@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Garanaw\SeedableMigrations\Listeners\MigrationEndedListener;
 use Garanaw\SeedableMigrations\Tests\Fixtures\SeedEachMigration;
 use Illuminate\Database\Events\MigrationEnded;

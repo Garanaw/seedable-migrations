@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Garanaw\SeedableMigrations\Cache\SeedableMigrations;
 use Garanaw\SeedableMigrations\Listeners\MigrationsEndedListener;
 use Garanaw\SeedableMigrations\Tests\Fixtures\EndOfBatchMigration;

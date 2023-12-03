@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Garanaw\SeedableMigrations\Tests;
 
 use Garanaw\SeedableMigrations\SeedableMigrationsServiceProvider;
