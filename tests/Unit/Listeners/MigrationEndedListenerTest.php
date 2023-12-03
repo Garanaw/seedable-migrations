@@ -35,7 +35,7 @@ describe('Migration Ended Listener', function () {
         };
         $this->swap(ConfigurableSeeder::class, $seeder);
 
-        $migration = new class extends SeedEachMigration {
+        $migration = new class () extends SeedEachMigration {
             public function upSeeders(): Collection
             {
                 return collect([
@@ -50,5 +50,5 @@ describe('Migration Ended Listener', function () {
         $listener = app(MigrationEndedListener::class);
         $listener->handle($event);
         expect($seeder->getConfig())->toBeInstanceOf(Repository::class);
-    })->only();
+    });
 });
