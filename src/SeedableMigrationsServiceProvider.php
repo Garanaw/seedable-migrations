@@ -40,6 +40,7 @@ class SeedableMigrationsServiceProvider extends ServiceProvider
                 __DIR__ . '/stubs/migration.stub' => base_path('stubs/migration.stub'),
                 __DIR__ . '/stubs/migration.create.stub' => base_path('stubs/migration.create.stub'),
                 __DIR__ . '/stubs/migration.update.stub' => base_path('stubs/migration.update.stub'),
+                __DIR__ . '/stubs/seeder.stub' => base_path('stubs/seeder.stub'),
             ], 'stubs');
         }
     }
