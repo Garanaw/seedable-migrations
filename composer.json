@@ -34,7 +34,8 @@
         "preferred-install": "dist",
         "optimize-autoloader": true,
         "allow-plugins": {
-            "kylekatarnls/update-helper": true
+            "kylekatarnls/update-helper": true,
+            "pestphp/pest-plugin": true
         }
     },
     "extra": {
@@ -43,5 +44,9 @@
                 "Garanaw\\SeedableMigrations\\SeedableMigrationsServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.15",
+        "pestphp/pest": "^2.26"
     }
 }
