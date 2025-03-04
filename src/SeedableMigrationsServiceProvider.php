@@ -35,7 +35,7 @@ class SeedableMigrationsServiceProvider extends ServiceProvider
 
     protected function publishStubs(): void
     {
-        if($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/stubs/migration.stub' => base_path('stubs/migration.stub'),
                 __DIR__ . '/stubs/migration.create.stub' => base_path('stubs/migration.create.stub'),

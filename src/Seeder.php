@@ -25,6 +25,7 @@ abstract class Seeder extends BaseSeeder
         Container $container,
     ) {
         $this->now = Carbon::now();
+        $this->setContainer($container);
     }
 
     /**
