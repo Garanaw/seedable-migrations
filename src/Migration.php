@@ -40,7 +40,7 @@ abstract class Migration extends BaseMigration implements SeedableMigration
         $version = str(app()->version())->explode('.')->first();
 
         $callback = match ($version) {
-            '12' => static fn (Connection $connection, string $table, \Closure $callback = null): BaseBlueprint => new $blueprint($connection, $table, $callback),
+            '12', '13' => static fn (Connection $connection, string $table, \Closure $callback = null): BaseBlueprint => new $blueprint($connection, $table, $callback),
             default => static fn (string $table, \Closure $callback = null): BaseBlueprint => new $blueprint($table, $callback),
         };
 
